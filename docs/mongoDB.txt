@@ -1,0 +1,2 @@
+//Verify that directories exist first
+sudo mongod --dbpath=/home/spancavil/Data/Temp/Mongo
