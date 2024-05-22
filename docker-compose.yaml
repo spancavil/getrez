@@ -1,0 +1,15 @@
+services:
+  reservations:
+    build:
+      context: .
+      dockerfile: ./apps/reservations/Dockerfile
+      target: development
+    # Command outside of the build
+    command: pnpm run start:dev reservations
+    ports:
+      - '3000:3000'
+    # Mount . to the container dir /user/src/app except node_modules and dist
+    volumes:
+      - .:/usr/src/app
+  mongo:
+    image: mongo

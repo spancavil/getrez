@@ -1,0 +1,17 @@
+# Position on folder with the Dockerfile
+# ../../ specify the context path, we mean origin of files for copying
+
+docker build ../../ -f Dockerfile -t sleepr_reservations
+
+docker run sleepr_reservations
+
+# Throws MONGODB_URI is required
+# We will use docker compose and allow to specify the env variables
+
+docker compose up
+
+# Will run correctly and in watch mode
+
+# Now we will make another image for running mongodb
+# Change the .env to point to the container of mongo made with docker compose: 
+# MONGODB_URI=mongodb://mongo:27017/sleepr
