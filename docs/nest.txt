@@ -1,0 +1,11 @@
+nest g app <name_app>
+
+#and specify where the module belongs
+nest g module <module_name>
+
+The app imports the modules created
+
+Specify the app
+nest g controller <controller_name>
+
+nest g service <service_name>

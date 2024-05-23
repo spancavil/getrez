@@ -11,5 +11,17 @@ services:
     # Mount . to the container dir /user/src/app except node_modules and dist
     volumes:
       - .:/usr/src/app
+  auth:
+    build:
+      context: .
+      dockerfile: ./apps/auth/Dockerfile
+      target: development
+    # Command outside of the build
+    command: pnpm run start:dev auth
+    ports:
+      - '3001:3001'
+    # Mount . to the container dir /user/src/app except node_modules and dist
+    volumes:
+      - .:/usr/src/app
   mongo:
     image: mongo
