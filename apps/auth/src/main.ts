@@ -3,9 +3,11 @@ import { AuthModule } from './auth.module';
 import { ValidationPipe } from '@nestjs/common';
 import { Logger } from 'nestjs-pino';
 import { ConfigService } from '@nestjs/config';
+import * as cookieParser from 'cookie-parser'
 
 async function bootstrap() {
   const app = await NestFactory.create(AuthModule);
+  app.use(cookieParser()) //For parsing incoming cookies. If this is not present, cookies will be not recognized.
   app.useGlobalPipes(new ValidationPipe({ whitelist: true})) //With the "whitelist", all the properties that are not validated throught decorators won't be considered.
   app.useLogger(app.get(Logger))
 
