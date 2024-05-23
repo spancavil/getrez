@@ -11,6 +11,8 @@ services:
     # Mount . to the container dir /user/src/app except node_modules and dist
     volumes:
       - .:/usr/src/app
+    env_file:
+      - ./apps/reservations/.env
   auth:
     build:
       context: .
@@ -23,5 +25,7 @@ services:
     # Mount . to the container dir /user/src/app except node_modules and dist
     volumes:
       - .:/usr/src/app
+    env_file:
+      - ./apps/auth/.env
   mongo:
     image: mongo
