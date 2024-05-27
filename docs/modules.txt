@@ -1,0 +1,27 @@
+Static module binding
+---------------------
+When we want to use a provider outside it's module, we need to export de provider with "exports" in the exporting module and import with "imports" in the consuming module, then it will be available to use in all the consuming module.
+
+Example (AuthService is in the "providers" of auth module that imports userservice)
+-------
+
+import { Injectable } from '@nestjs/common';
+import { UsersService } from '../users/users.service';
+
+@Injectable()
+export class AuthService {
+  constructor(private usersService: UsersService) {}
+  /*
+    Implementation that makes use of this.usersService
+  */
+}
+
+Let's unpack what's happening during this process. Nest makes UsersService available inside AuthModule by:
+
+Instantiating UsersModule, including transitively importing other modules that UsersModule itself consumes, and transitively resolving any dependencies.
+Instantiating AuthModule, and making UsersModule's exported providers available to components in AuthModule (just as if they had been declared in AuthModule).
+Injecting an instance of UsersService in AuthService (constructor)
+
+Dynamic module
+A dynamic module, it's basically a module which could be imported but could also could be configured at the import time.
+The best example of this is the "Configuration Module"

@@ -8,11 +8,11 @@ export class ReservationsService {
 
   constructor (private readonly reservationRepository: ReservationsRepository) {}
 
-  create(createReservationDto: CreateReservationDto) {
+  create(createReservationDto: CreateReservationDto, userId: string) {
     return this.reservationRepository.create({
       ...createReservationDto,
       timestamp: new Date(),
-      userId: '1234',
+      userId
     })
   }
 

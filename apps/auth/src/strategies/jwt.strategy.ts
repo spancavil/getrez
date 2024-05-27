@@ -15,7 +15,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         super ({
             //Where on the request object the JWT lives
             jwtFromRequest: ExtractJwt.fromExtractors([
-                (request: Request) => request?.cookies?.Authentication,
+                //"any" because could be a normal request or a RPC call
+                (request: any) => request?.cookies?.Authentication || request?.Authentication
             ]),
             secretOrKey: configService.get('JWT_SECRET')
         })
