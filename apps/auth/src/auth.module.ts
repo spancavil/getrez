@@ -19,7 +19,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
           expiresIn: `${configService.get<string>('JWT_EXPIRATION_SECONDS')}s`, //value seconds
         },
       }),
-      inject: [ConfigService]
+      inject: [ConfigService],
     }),
     ConfigModule.forRoot({
       isGlobal: true,
@@ -29,8 +29,8 @@ import { JwtStrategy } from './strategies/jwt.strategy';
         JWT_EXPIRATION_SECONDS: Joi.string().required(),
         HTTP_PORT: Joi.number().required(),
         TCP_PORT: Joi.number().required(),
-      })
-    })
+      }),
+    }),
   ],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, JwtStrategy],

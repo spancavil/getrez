@@ -1,5 +1,5 @@
 import { CanActivate, ExecutionContext, Inject, Injectable } from '@nestjs/common';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, catchError, map, of, tap } from 'rxjs';
 import { AUTH_SERVICE } from '../constants/services';
 import { ClientProxy } from '@nestjs/microservices';
 import { User } from '../dto';
@@ -27,7 +27,8 @@ export class JwtAuthGuard implements CanActivate {
             //Set the user property in the request with the response
             context.switchToHttp().getRequest().user = res 
         }),
-        map(()=> true) //Return true allows to proceed
+        map(()=> true), //Return true allows to proceed
+        catchError(()=> of(false)) //If there's an error catch it and return false
     )
   }
 }
