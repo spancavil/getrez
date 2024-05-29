@@ -34,12 +34,25 @@ services:
       target: development
     # Command outside of the build
     command: pnpm run start:dev payments
-    ports:
-      - '3003:3003'
+    # we don't need to expose any ports because the ports are open over the internal network
     # Mount . to the container dir /user/src/app except node_modules and dist
     volumes:
       - .:/usr/src/app
     env_file:
       - ./apps/payments/.env
+  notifications:
+    build:
+      context: .
+      dockerfile: ./apps/notifications/Dockerfile
+      target: development
+    # Command outside of the build
+    command: pnpm run start:dev notifications
+    # we don't need to expose any ports because the ports are open over the internal network
+
+    # Mount . to the container dir /user/src/app except node_modules and dist
+    volumes:
+      - .:/usr/src/app
+    env_file:
+      - ./apps/notifications/.env
   mongo:
     image: mongo
