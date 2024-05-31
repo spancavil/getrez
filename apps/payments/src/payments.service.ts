@@ -34,6 +34,7 @@ export class PaymentsService {
     //use "emit" because is not Message Pattern, its an event pattern.
     this.notificationsService.emit('notify_email', {
       email: createChargeDto.email,
+      text: `Your payment of ${createChargeDto.amount} USD has completed successfully.`
     });
 
     return paymentIntent;

@@ -1,0 +1,5 @@
+Google console
+1. Google oauth. Redirect to https://developer.google.com/oauthplayground
+2. Get keys
+3. Go to https://developer.google.com/oauthplayground set clientId and clientSecret and get refresh token to use in the app.
+
